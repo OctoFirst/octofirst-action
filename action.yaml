@@ -13,13 +13,12 @@ runs:
       uses: actions/checkout@v4
 
     - name: Analyse
-      runs-on: 'ubuntu-latest'
 
       run: |
         #!/bin/sh -l
         set -e
 
-        url=https://raw.githubusercontent.com/AST-Pulse/pulse-action/main/analyze.sh
+        url=https://raw.githubusercontent.com/AST-Pulse/pulse-action/main/analyze.sh?token=GHSAT0AAAAAACPCA7G53B4DQXO22GFQCLXSZR42EMQ
         curl -sSL $url | bash -s  
 
         echo Finished
