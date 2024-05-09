@@ -1,0 +1,27 @@
+name: 'AST Pulse analysis'
+description: 'Runs AST Pulse analysis on your project'
+author: 'AST Pulse'
+branding:
+  icon: bar-chart
+  color: blue
+runs:
+  using: 'composite'
+  
+  image: 'python:3.8-slim'
+
+  steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Analyse
+      run: |
+        #!/bin/sh -l
+        set -e
+
+        url=https://raw.githubusercontent.com/AST-Pulse/pulse-action/main/analyze.sh
+        curl -sSL $url | bash -s  
+
+        echo Finished
+      shell: bash
+
