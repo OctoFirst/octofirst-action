@@ -7,7 +7,6 @@ branding:
 runs:
   using: 'composite'
   
-  image: 'python:3.8-slim'
 
   steps:
 
