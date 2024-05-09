@@ -6,7 +6,6 @@ branding:
   color: blue
 runs:
   using: 'composite'
-  runs-on: 'ubuntu-latest'
 
   steps:
 
@@ -14,6 +13,8 @@ runs:
       uses: actions/checkout@v4
 
     - name: Analyse
+      runs-on: 'ubuntu-latest'
+
       run: |
         #!/bin/sh -l
         set -e
