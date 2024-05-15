@@ -49,6 +49,9 @@ function analyze {
 
     # add date
     date=$(echo $GIT_DATE | sed 's/ /%20/g')
+    date=$(echo $date | sed 's/+/%2B/g')
+    date=$(echo $date | sed 's/:/%3A/g')
+    date=$(echo $date | sed 's/-/%2D/g')
     url="$url&date=${date}"
 
     analyze_lizard
@@ -104,6 +107,10 @@ if git diff-tree --no-commit-id --name-only -r $last_commit | grep -q ".github/w
     echo "Last commit concerns the .github/workflows/ast-pulse.yml file"
     analyseHistory=true
 fi
+
+# tmp
+analyseHistory=true
+
 
 # If the last commit concerns the .github/workflows/ast-pulse.yml file, then we need to analyze the history, week by week
 if [ "$analyseHistory" = true ]; then
