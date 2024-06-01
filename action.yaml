@@ -12,6 +12,9 @@ runs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    - name: Install Python
+      uses: actions/setup-python@v1
+
     - name: Analyse
       run: |
         #!/bin/sh -l
