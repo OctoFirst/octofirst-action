@@ -53,8 +53,8 @@ function analyze_lizard {
     # Install lizard
     installed=$(pip show lizard)
     if [ -z "$installed" ]; then
-        echo "Installing lizard"
-        pip install lizard
+        echo "Please install lizard: pip install lizard"
+        exit 1
     fi
 
     # Start the analysis
