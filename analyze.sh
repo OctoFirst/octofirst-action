@@ -3,22 +3,13 @@ set -e
 
 function analyze {
 
-    # if env == "dev" then
-    url="@todo"
-    # If $GITHUB_ACTIONS is not set, then we are running locally
-    if [ -z "$GITHUB_ACTIONS" ]; then
-        echo "Running in dev mode"
-        url="http://localhost:8000/webhook/github/action/_ACTION_?"
+    if [ -z "$GITHUB_REPOSITORY_ID" ]; then
+        echo "GITHUB_REPOSITORY_ID is not set"
+        exit 1
     fi
 
-    RUN="${GITHUB_RUN_ID}"
-    if [ -z "$RUN" ]; then
-        RUN="local"
-    fi
-
-    # ensure variables are set
-    if [ -z "$GITHUB_SHA" ]; then
-        echo "GITHUB_SHA is not set"
+    if [ -z "$OCTOFIRST_SECRET" ]; then
+        echo "OCTOFIRST_SECRET is not set"
         exit 1
     fi
 
@@ -27,25 +18,23 @@ function analyze {
         exit 1
     fi
 
-    if [ -z "$GITHUB_REPOSITORY" ]; then
-        echo "GITHUB_REPOSITORY is not set"
+    # ensure variables are set
+    if [ -z "$GITHUB_SHA" ]; then
+        echo "GITHUB_SHA is not set"
         exit 1
     fi
 
-    if [ -z "$GITHUB_REPOSITORY_ID" ]; then
-        echo "GITHUB_REPOSITORY_ID is not set"
-        exit 1
+
+    # if env == "dev" then
+    url="https://app.octofirst.com"
+    # If $GITHUB_ACTIONS is not set, then we are running locally
+    if [ -z "$GITHUB_ACTIONS" ]; then
+        echo "Running in dev mode"
+        url="http://localhost:8000"
     fi
 
-    # add current git commit hash to the url
-    url="$url&ref=${GIT_SHA}"
-
-    # add current branch
-    url="$url&branch=${GITHUB_REF}"
-
-    # add current repository
-    url="$url&repository=${GITHUB_REPOSITORY}"
-    url="$url&repository_id=${GITHUB_REPOSITORY_ID}"
+    
+    url="${url}/webhook/github/r/${GITHUB_REPOSITORY_ID}/action/_ACTION_?key=${OCTOFIRST_SECRET}&branch=${GITHUB_REF}&sha=${GITHUB_SHA}"
 
     # add date
     date=$(echo $GIT_DATE | sed 's/ /%20/g')
