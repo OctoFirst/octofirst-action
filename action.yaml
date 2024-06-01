@@ -1,6 +1,6 @@
-name: 'AST Pulse analysis'
-description: 'Runs AST Pulse analysis on your project'
-author: 'AST Pulse'
+name: 'OctoFirst analysis'
+description: 'Runs OctoFirst analysis on your project'
+author: 'OctoFirst'
 branding:
   icon: bar-chart
   color: blue
@@ -13,12 +13,12 @@ runs:
       uses: actions/checkout@v4
 
     - name: Analyse
-
       run: |
         #!/bin/sh -l
         set -e
 
-        url=https://raw.githubusercontent.com/AST-Pulse/pulse-action/main/analyze.sh?token=GHSAT0AAAAAACPCA7G53B4DQXO22GFQCLXSZR42EMQ
+        # this file is (and will forever be) open source. Feel free to check it out
+        url=https://raw.githubusercontent.com/OctoFirst/octofirst-action/main/analyze.sh
         curl -sSL $url | bash -s  
 
         echo Finished

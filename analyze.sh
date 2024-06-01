@@ -100,19 +100,16 @@ function analyze_lizard {
 }
 
 analyseHistory=false
-# detect if last commit concerns the .github/workflows/ast-pulse.yml file
+# detect if last commit concerns the .github/workflows/octofirst.yml file
 # (it means that the analysis is triggered for the first time or the configuration has changed)
 last_commit=$(git log -1 --name-only --pretty=format:"%H")
-if git diff-tree --no-commit-id --name-only -r $last_commit | grep -q ".github/workflows/ast-pulse.yml"; then
-    echo "Last commit concerns the .github/workflows/ast-pulse.yml file"
+if git diff-tree --no-commit-id --name-only -r $last_commit | grep -q ".github/workflows/octofirst.yml"; then
+    echo "Last commit concerns the .github/workflows/octofirst.yml file"
     analyseHistory=true
 fi
 
-# tmp
-analyseHistory=true
 
-
-# If the last commit concerns the .github/workflows/ast-pulse.yml file, then we need to analyze the history, week by week
+# If the last commit concerns the .github/workflows/octofirst.yml file, then we need to analyze the history, week by week
 if [ "$analyseHistory" = true ]; then
     echo "Analyzing history"
     currentBranch=$(git branch --show-current)
