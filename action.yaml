@@ -23,4 +23,11 @@ runs:
 
         echo Finished
       shell: bash
+      env:
+        OCTOFIRST_SECRET: ${{ input.octofirst_secret }}
 
+
+inputs:
+  octofirst_secret:
+    description: 'Your secret token for OctoFirst application'
+    required: true
