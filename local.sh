@@ -4,6 +4,6 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 GITHUB_SHA=123 \
 GITHUB_REF=main \
-OCTOFIRST_SECRET=123secret \
-GITHUB_REPOSITORY_ID="123456" \
-    bash "${DIR}/analyze.sh"
+OCTOFIRST_SECRET=b241f0a647ddfa6a08dd8b958e9c76a0bc38f5a0e9d19205e1 \
+GITHUB_REPOSITORY_ID="910722294" \
+    bash -x "${DIR}/analyze.sh"

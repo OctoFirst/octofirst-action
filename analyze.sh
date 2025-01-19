@@ -25,12 +25,11 @@ function analyze {
     fi
 
 
-    # if env == "dev" then
     url="https://app.octofirst.com"
     # If $GITHUB_ACTIONS is not set, then we are running locally
     if [ -z "$GITHUB_ACTIONS" ]; then
         echo "Running in dev mode"
-        url="http://localhost:8000"
+        url="https://octofirst.app.localhost"
     fi
 
     
@@ -43,7 +42,8 @@ function analyze {
     date=$(echo $date | sed 's/-/%2D/g')
     url="$url&date=${date}"
 
-    analyze_lizard
+    #analyze_lizard
+    analyze_tests
 }
 
 function analyze_lizard {
@@ -51,7 +51,7 @@ function analyze_lizard {
     echo "Analyzing with lizard"
 
     # Install lizard
-    installed=$(pip show lizard)
+    installed=$(which lizard)
     if [ -z "$installed" ]; then
         echo "Please install lizard: pip install lizard"
         exit 1
@@ -86,6 +86,40 @@ function analyze_lizard {
     echo "Response: $response"
 
     rm lizard.csv
+}
+
+# Count Test Methods
+function analyze_tests {
+  # PHPUnit, Pest methods
+  phpunitTests=$(grep -h  -i -n -r -c "function test" --include \*.php | awk '{n+=$0} END {print n}')
+
+  # Go tests
+  goTests=$(grep -h  -i -n -r -c "^func Test" --include \*.go | awk '{n+=$0} END {print n}')
+
+  # Java tests
+  javaTests=$(grep -h  -i -n -r -c "public void test" --include \*.java | awk '{n+=$0} END {print n}')
+
+  # Jest tests
+  jestTests=$(grep -h  -i -n -r -c "^test(" --include \*.ts --include \*.js| awk '{n+=$0} END {print n}')
+
+  # Pytest tests
+  pytestTests=$(grep -h  -i -n -r -c "def test" --include \*.py | awk '{n+=$0} END {print n}')
+
+  csv="phpunitTests,goTests,javaTests,jestTests,pytestTests\n"
+  csv="$csv$phpunitTests,$goTests,$javaTests,$jestTests,$pytestTests"
+
+  # Send the results to the server
+  testsUrl=$(echo $url|sed 's/_ACTION_/testing/g')
+  echo "Sending tests results to $testsUrl"
+
+  response=$(curl \
+      -X POST $testsUrl \
+      --fail \
+      --insecure \
+      -L \
+      -H "Content-Type: text/csv" \
+      --data-binary "$csv")
+
 }
 
 analyseHistory=false
