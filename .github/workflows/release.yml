@@ -1,5 +1,8 @@
-name: Create Tag and Update v1 Alias
+name: Release new v1 tag
 
+permissions:
+  contents: write
+  
 on:
   workflow_dispatch:
     inputs:
