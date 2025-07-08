@@ -1,0 +1,36 @@
+name: Create Tag and Update v1 Alias
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to create (e.g. v1.2.3)'
+        required: true
+        type: string
+
+jobs:
+  tag-and-alias:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Important to have full history for tagging
+
+      - name: Set up Git user
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+      - name: Create tag ${{ inputs.tag }}
+        run: |
+          git tag -a "${{ inputs.tag }}" -m "Release ${{ inputs.tag }}"
+          git push origin "${{ inputs.tag }}"
+
+      - name: Move v1 tag to point to ${{ inputs.tag }}
+        run: |
+          git tag -d v1 || true
+          git push origin :refs/tags/v1 || true
+          git tag -a v1 -m "Alias for ${{ inputs.tag }}"
+          git push origin v1
