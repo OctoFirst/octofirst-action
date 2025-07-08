@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: OctoFirst
-          uses: OctoFirst/octofirst-action@v1.0.0
+          uses: OctoFirst/octofirst-action@v1
           with:
             OCTOFIRST_SECRET: {{ secrets.OCTOFIRST_SECRET }}
 ```
