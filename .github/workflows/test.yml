@@ -8,3 +8,12 @@ jobs:
     steps:  
         - uses: actions/checkout@v4
         - uses: ./
+          env:
+            SKIP_REPORT: "true"
+            GITHUB_SHA: 123
+            GITHUB_REF: main
+            GITHUB_REPOSITORY_ID: 123456
+          with:
+            octofirst_secret: "abcdefghijklmnopqrstuvwxyz"
+            # current git ref
+            octofirst_action_ref: ${{ github.sha }}
