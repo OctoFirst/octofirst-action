@@ -21,6 +21,6 @@ function analyze_phpmetrics {
         .
 
     # Send the results to the server
-    send_report "phpmetrics" "phpmetrics-summary.json"
+    send_report "phpmetrics" "phpmetrics-summary.json" "application/json"
     file_delete "phpmetrics-summary.json"
 }

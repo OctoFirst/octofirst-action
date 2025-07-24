@@ -1,6 +1,7 @@
 function send_report {
   name="$1"
   file="$2"
+  contentType="$3"
 
   if [[ "true" == "$SKIP_REPORT" ]]; then
     text_info "Skipping report sending as SKIP_REPORT is set to true."
@@ -9,7 +10,7 @@ function send_report {
 
 
   if [ -z "$name" ] || [ -z "$file" ]; then
-    text_error "Usage: send_report <name> <file>"
+    text_error "Usage: send_report <name> <file> <contentType>"
     exit 1
   fi
 
@@ -19,7 +20,7 @@ function send_report {
       -X POST $finalUrl \
       --fail \
       -L \
-      -H "Content-Type: text/csv" \
+      -H "Content-Type: $contentType" \
       --data-binary @$file \
   )
 

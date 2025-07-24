@@ -28,7 +28,7 @@ function analyze {
     # If $GITHUB_ACTIONS is not set, then we are running locally
     if [ -z "$GITHUB_ACTIONS" ]; then
         text_info "Running in dev mode"
-        url="http://localhost:8000"
+        url="https://octofirst.app.localhost"
     fi
 
 

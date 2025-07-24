@@ -44,7 +44,6 @@ runs:
       run: |
         #!/bin/sh -l
         set -e
-        ls -al
         
         # this file is (and will forever be) open source. Feel free to check it out
         cd sources

@@ -30,6 +30,6 @@ function analyze_lizard {
         -V
 
     # Send the results to the server
-    send_report "lizard" "lizard.csv"
+    send_report "lizard" "lizard.csv" "text/csv"
     file_delete lizard.csv
 }

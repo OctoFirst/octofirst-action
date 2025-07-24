@@ -15,5 +15,5 @@ fi
 
 # Do not run phpmetrics analysis
 if [[ -z "$SKIP_PHPMETRICS" ]]; then
-  SKIP_PHPMETRICS=true
+  SKIP_PHPMETRICS=false
 fi
