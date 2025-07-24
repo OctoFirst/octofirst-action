@@ -47,7 +47,8 @@ runs:
         ls -al
         
         # this file is (and will forever be) open source. Feel free to check it out
-        bash ./octofirst-action/analyze.sh sources
+        cd sources
+        bash ../octofirst-action/analyze.sh
 
         echo Finished
       shell: bash
