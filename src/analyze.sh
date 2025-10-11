@@ -43,4 +43,5 @@ function analyze {
 
     analyze_lizard
     analyze_phpmetrics
+    analyze_astmetrics
 }

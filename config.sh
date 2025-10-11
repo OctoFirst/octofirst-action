@@ -17,3 +17,8 @@ fi
 if [[ -z "$SKIP_PHPMETRICS" ]]; then
   SKIP_PHPMETRICS=false
 fi
+
+# Do not run astmetrics analysis
+if [[ -z "$SKIP_ASTMETRICS" ]]; then
+  SKIP_ASTMETRICS=true
+fi

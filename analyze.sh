@@ -20,6 +20,7 @@ fi
 . "$DIR/src/analyze.sh"
 . "$DIR/src/analyze_lizard.sh"
 . "$DIR/src/analyze_phpmetrics.sh"
+. "$DIR/src/analyze_astmetrics.sh"
 . "$DIR/src/main.sh"
 
 main "$@"
